@@ -1,6 +1,10 @@
 # apollo-server-azure-functions 
 
-Example:
+## Work in progress
+
+This still needs tests and should be made in to a PR against the main repo where the rest of the bindings are.
+
+## Example:
 
 ```js
 const server = require("@ulrikstrid/apollo-server-azure-functions");
@@ -34,9 +38,13 @@ const schema = graphqlTools.makeExecutableSchema({
 
 module.exports = function run(context, request) {
   if (request.method === "POST") {
-    server.graphqlAzureFunctions(context, request);
+    server.graphqlAzureFunctions({
+        endpointURL: '/api/get'
+    })(context, request);
   } else if (request.method === "GET") {
-    return server.graphiqlAzureFunctions(context, request);
+    return server.graphiqlAzureFunctions({
+        endpointURL: '/api/get'
+    })(context, request);
   }
 };
 ```
